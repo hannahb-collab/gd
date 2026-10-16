@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKDSE English Speaking: Group Discussion Trainer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        hkdse: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header Navigation -->
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-500 text-white p-2 rounded-xl shadow-lg">
+                    <i class="fa-solid fa-comments text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight">HKDSE English Speaking Trainer</h1>
+                    <p class="text-xs text-blue-200 hidden sm:block">Paper 4 Group Discussion Useful Expressions Mastery</p>
+                </div>
+            </div>
+            
+            <div id="userBadge" class="hidden flex items-center space-x-3 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-900 font-bold flex items-center justify-center text-sm shadow-inner" id="userAvatar">
+                    S
+                </div>
+                <div class="text-xs">
+                    <div class="font-semibold text-white" id="displayName">Student</div>
+                    <div class="text-blue-200" id="displayStats">Score: 0 | Done: 0/40</div>
+                </div>
+                <button onclick="logout()" class="text-slate-300 hover:text-white ml-2 text-xs transition" title="Exit / Switch Student">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- VIEW 1: LOGIN / WELCOME SCREEN -->
+        <div id="loginView" class="max-w-md mx-auto my-8 bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-6 text-white text-center">
+                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                    <i class="fa-solid fa-graduation-cap text-3xl text-amber-300"></i>
+                </div>
+                <h2 class="text-2xl font-bold">Paper 4 Discussion Prep</h2>
+                <p class="text-sm text-blue-100 mt-1">Master HKDSE Group Discussion Expressions & Strategies</p>
+            </div>
+            <div class="p-6 sm:p-8">
+                <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label for="studentName" class="block text-sm font-semibold text-slate-700 mb-1">Student Name or ID</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input type="text" id="studentName" required placeholder="e.g., Alex Wong" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium transition outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="studentClass" class="block text-sm font-semibold text-slate-700 mb-1">Candidate ID / Class (Optional)</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="fa-solid fa-id-card"></i>
+                            </span>
+                            <input type="text" id="studentClass" placeholder="e.g., Candidate A / 6A" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium transition outline-none">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center space-x-2">
+                        <span>Start Practice Session</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="mt-6 border-t border-slate-100 pt-4">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Features Included:</h4>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> 40+ Exam-realistic HKDSE dialogue scenarios</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Automated polite expression & key phrase analysis</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Model answers with level 5** expression suggestions</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Instant printable progress scorecard & copyable code tools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: PRACTICE DASHBOARD -->
+        <div id="practiceView" class="hidden space-y-6">
+
+            <!-- Category Selector & Search -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Tabs -->
+                <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                    <button onclick="setFilter('all')" id="filter-all" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-sm transition">
+                        All (40)
+                    </button>
+                    <button onclick="setFilter('opening')" id="filter-opening" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        Opening & Topic
+                    </button>
+                    <button onclick="setFilter('agree')" id="filter-agree" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        Agree & Build
+                    </button>
+                    <button onclick="setFilter('disagree')" id="filter-disagree" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        Polite Disagreement
+                    </button>
+                    <button onclick="setFilter('interrupt')" id="filter-interrupt" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        Interrupting/Involving
+                    </button>
+                    <button onclick="setFilter('steering')" id="filter-steering" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        Steering & Concluding
+                    </button>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+                    <button onclick="openCheatSheet()" class="px-3 py-1.5 bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200 rounded-lg text-xs font-semibold transition flex items-center space-x-1">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Useful Expressions Bank</span>
+                    </button>
+                    <button onclick="showSummaryModal()" class="px-3 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 rounded-lg text-xs font-semibold transition flex items-center space-x-1">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Score Report</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Question Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Question Card Left/Main (2 Columns on LG) -->
+                <div class="lg:col-span-2 space-y-6">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 space-y-6 relative">
+                        <!-- Progress & Status Bar -->
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                            <div>
+                                <span id="categoryBadge" class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-800 uppercase tracking-wide">
+                                    Opening a Discussion
+                                </span>
+                                <span class="text-xs text-slate-400 ml-2 font-medium" id="questionIndexText">Question 1 of 40</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs font-semibold text-slate-500">ID:</span>
+                                <span class="text-xs font-mono font-bold text-slate-700" id="qIdDisplay">#Q01</span>
+                            </div>
+                        </div>
+
+                        <!-- Dialogue Scenario Card -->
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border-l-4 border-blue-500 p-4 rounded-r-xl">
+                                <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-1">Exam Situation / Prompt</h3>
+                                <p id="examTopic" class="text-sm font-semibold text-slate-800">
+                                    "Your group is planning a campaign to promote healthy eating among secondary school students in Hong Kong."
+                                </p>
+                            </div>
+
+                            <!-- Dialogue Turns -->
+                            <div class="space-y-3 bg-slate-50/50 p-4 rounded-xl border border-slate-100" id="dialogueContainer">
+                                <!-- Dynamic Dialogue Messages injected here -->
+                            </div>
+                        </div>
+
+                        <!-- Student Input Form -->
+                        <div class="space-y-3 pt-2">
+                            <label for="studentAnswer" class="block text-sm font-bold text-slate-800 flex justify-between items-center">
+                                <span>Your Turn to Respond (Type your dialogue statement):</span>
+                                <span class="text-xs font-normal text-slate-500" id="charCount">0 chars</span>
+                            </label>
+                            
+                            <textarea id="studentAnswer" rows="4" placeholder="Type your response here using appropriate HKDSE expression frameworks..."
+                                class="w-full p-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm font-medium transition outline-none resize-y"
+                                oninput="updateCharCount()"></textarea>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                                <button onclick="showHint()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
+                                    <i class="fa-regular fa-lightbulb"></i>
+                                    <span>Need a Strategy Hint?</span>
+                                </button>
+                                
+                                <div class="flex space-x-2">
+                                    <button onclick="skipQuestion()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition">
+                                        Skip / Next
+                                    </button>
+                                    <button onclick="submitAnswer()" id="btnSubmit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-xl text-xs shadow-md transition flex items-center space-x-1">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                        <span>Evaluate Answer</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hint Box (Hidden by default) -->
+                        <div id="hintBox" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 space-y-1">
+                            <div class="font-bold flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-info text-amber-600"></i>
+                                <span>Target Discussion Strategy:</span>
+                            </div>
+                            <p id="hintText" class="text-amber-800">Use expressions like "To kick off our discussion..." or "Shall we start by considering..."</p>
+                        </div>
+
+                        <!-- Evaluation Results Box (Hidden by default) -->
+                        <div id="evalResult" class="hidden rounded-xl border p-4 space-y-3 transition-all duration-300">
+                            <!-- Dynamic evaluation content -->
+                        </div>
+
+                    </div>
+
+                    <!-- Navigation controls -->
+                    <div class="flex justify-between items-center">
+                        <button onclick="prevQuestion()" id="btnPrev" class="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 shadow-sm transition flex items-center space-x-1">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            <span>Previous Question</span>
+                        </button>
+                        <button onclick="nextQuestion()" id="btnNext" class="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 shadow-sm transition flex items-center space-x-1">
+                            <span>Next Question</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar / Question Quick Selector (1 Column on LG) -->
+                <div class="space-y-6">
+
+                    <!-- Questions Grid List Card -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800 text-sm">Question Directory</h3>
+                            <span class="text-xs text-slate-500" id="completionCounter">0 / 40 Answered</span>
+                        </div>
+
+                        <!-- Search/Filter input -->
+                        <div class="relative">
+                            <input type="text" id="qSearch" onkeyup="filterQuestionList()" placeholder="Filter questions..." class="w-full pl-8 pr-3 py-1.5 border border-slate-200 rounded-lg text-xs outline-none focus:border-blue-500">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                        </div>
+
+                        <!-- Numbered Grid -->
+                        <div class="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-5 gap-2 max-h-72 overflow-y-auto custom-scrollbar p-1" id="qGrid">
+                            <!-- Injected by JavaScript -->
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block mr-1"></span> Complete</span>
+                            <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block mr-1"></span> Skipped</span>
+                            <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-slate-200 inline-block mr-1"></span> Unattempted</span>
+                        </div>
+                    </div>
+
+                    <!-- Exam Tip Box -->
+                    <div class="bg-gradient-to-br from-indigo-900 to-blue-900 rounded-2xl shadow-sm text-white p-5 space-y-3">
+                        <div class="flex items-center space-x-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-award"></i>
+                            <span>HKDSE Paper 4 Pro Tip</span>
+                        </div>
+                        <p class="text-xs text-indigo-100 leading-relaxed" id="dseTipText">
+                            "Always elaborate on your point after using an expression! Don't just say 'I agree with candidate A'. Explain *why* you agree and add a new perspective."
+                        </p>
+                        <button onclick="rotateTip()" class="text-[11px] text-amber-300 hover:underline font-medium block">Get another tip &rarr;</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- CHEAT SHEET MODAL -->
+    <div id="cheatSheetModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+            <div class="p-4 sm:p-6 bg-slate-900 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-book-bookmark text-amber-400 text-lg"></i>
+                    <h3 class="font-bold text-lg">HKDSE Group Discussion Useful Expressions Bank</h3>
+                </div>
+                <button onclick="closeCheatSheet()" class="text-slate-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6 text-sm text-slate-700">
+                <div>
+                    <h4 class="font-bold text-blue-700 text-xs uppercase tracking-wider mb-2 border-b border-blue-100 pb-1">1. Opening the Discussion</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-mono text-xs text-slate-800">
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"Good morning / afternoon everyone. Shall we start our discussion today?"</span>
+                            <button onclick="copyToClipboard('Good morning / afternoon everyone. Shall we start our discussion today?', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"To kick off our discussion today, let's first look at..."</span>
+                            <button onclick="copyToClipboard('To kick off our discussion today, let\'s first look at...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"Why don't we begin by discussing the first point, which is..."</span>
+                            <button onclick="copyToClipboard('Why don\'t we begin by discussing the first point, which is...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-blue-700 text-xs uppercase tracking-wider mb-2 border-b border-blue-100 pb-1">2. Expressing Agreement & Building On Points</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-mono text-xs text-slate-800">
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"I completely agree with Candidate A's point that... Furthermore,..."</span>
+                            <button onclick="copyToClipboard('I completely agree with Candidate A\'s point that... Furthermore,...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"That's a very valid point made by Candidate B. Building on that, I think..."</span>
+                            <button onclick="copyToClipboard('That\'s a very valid point made by Candidate B. Building on that, I think...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-blue-700 text-xs uppercase tracking-wider mb-2 border-b border-blue-100 pb-1">3. Expressing Polite Disagreement</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-mono text-xs text-slate-800">
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"I see your point, but have you considered that..."</span>
+                            <button onclick="copyToClipboard('I see your point, but have you considered that...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>"While I understand Candidate A's perspective, I am slightly concerned that..."</span>
+                            <button onclick="copyToClipboard('While I understand Candidate A\'s perspective, I am slightly concerned that...', this)" class="text-xs bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-1 rounded transition ml-2 flex-shrink-0">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button onclick="closeCheatSheet()" class="px-4 py-2 bg-slate-800 text-white font-semibold rounded-xl text-xs hover:bg-slate-700 transition">
+                    Close Reference
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUMMARY REPORT MODAL -->
+    <div id="summaryModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-xl">HKDSE Practice Performance</h3>
+                    <p class="text-xs text-blue-200" id="summaryStudentMeta">Student Progress Report</p>
+                </div>
+                <button onclick="closeSummaryModal()" class="text-slate-300 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+
+                <!-- Stats Overview Grid -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+                        <span class="block text-2xl font-bold text-blue-700" id="summaryCompleted">0 / 40</span>
+                        <span class="text-xs font-semibold text-slate-500">Attempted</span>
+                    </div>
+                    <div class="bg-green-50 border border-green-100 rounded-xl p-4 text-center">
+                        <span class="block text-2xl font-bold text-green-700" id="summaryScore">0 %</span>
+                        <span class="text-xs font-semibold text-slate-500">Overall Accuracy</span>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                        <span class="block text-2xl font-bold text-amber-700" id="summaryGrade">Level 3</span>
+                        <span class="text-xs font-semibold text-slate-500">Predicted Band</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Category breakdown -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Skills Competency Breakdown</h4>
+                    <div class="space-y-2 text-xs" id="categoryBreakdownList">
+                        <!-- Injected via Javascript -->
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-2">
+                    <h4 class="font-bold text-slate-800 flex items-center space-x-1">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                        <span>Examiner's Advice for Improvement:</span>
+                    </h4>
+                    <p class="text-slate-600 leading-relaxed" id="examinerAdviceText">
+                        Complete more questions across all categories to receive tailored examiner feedback on your performance.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+                <button onclick="window.print()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl text-xs transition flex items-center space-x-1">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Print Report</span>
+                </button>
+                <button onclick="closeSummaryModal()" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-800 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-medium hidden flex items-center space-x-2 z-50 transition-all">
+        <i class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMsg">Copied to clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+        <p>HKDSE English Language Paper 4 (Speaking) Group Discussion Practice System &copy; 2026</p>
+    </footer>
+
+    <script>
+        /*
+         * FULL QUESTION BANK: 40 Realistic HKDSE Discussion Scenarios
+         */
+        const questionsData = [
+            // 1-8 Opening & Topic Introduction
+            {
+                id: "Q01",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Your committee is planning an Environment Week at school.",
+                speaker: "Candidate A",
+                dialogue: "Good morning everyone. We are here today to discuss the events for Environment Week.",
+                prompt: "Take the initiative to formally open the discussion and outline the first item on the agenda.",
+                hint: "Use phrases like 'Shall we start by considering...' or 'To kick off our discussion...'",
+                modelAnswer: "Good morning everyone. To kick off our discussion today, shall we first look at the proposed activities for Environment Week?",
+                keywords: ["kick off", "start", "begin", "shall we", "first", "discussion", "agenda"],
+                politePhrases: ["good morning", "good afternoon", "everyone", "shall we", "why don't we"]
+            },
+            {
+                id: "Q02",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Promoting mental health awareness among secondary school students.",
+                speaker: "Exam Silent Phase",
+                dialogue: "The 10-second preparation time is up. You may start your discussion now.",
+                prompt: "Be the first candidate to start the discussion confidently and state the goal of the meeting.",
+                hint: "Greet your group members and state the purpose clearly.",
+                modelAnswer: "Good afternoon everyone. Welcome to our group discussion. Today we are asked to discuss ways to promote mental health awareness in school. Why don't we begin with the first prompt?",
+                keywords: ["welcome", "start", "begin", "today", "discuss", "mental health", "first"],
+                politePhrases: ["good afternoon", "everyone", "why don't we", "shall we"]
+            },
+            {
+                id: "Q03",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Designing a new graduation gift for Secondary 6 graduates.",
+                speaker: "Candidate B",
+                dialogue: "We have three options to choose from: a customized photo album, a hoodie, or an engraved fountain pen.",
+                prompt: "Respond to Candidate B by opening the comparison phase and suggesting which option to discuss first.",
+                hint: "Suggest prioritizing one option to establish structure.",
+                modelAnswer: "That's right. To keep our discussion structured, shall we start by evaluating the customized photo album first before moving on to the other options?",
+                keywords: ["structured", "start", "evaluating", "first", "moving on", "option"],
+                politePhrases: ["shall we", "why don't we", "that's right"]
+            },
+            {
+                id: "Q04",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Organizing a charity food drive in your neighborhood.",
+                speaker: "Candidate C",
+                dialogue: "We need to decide on the target group, the dates, and how to recruit volunteers.",
+                prompt: "Structure the order of discussion for the three main points.",
+                hint: "Break down the agenda into clear sequential steps (first, then, finally).",
+                modelAnswer: "I agree. To ensure we cover everything, why don't we first talk about the target group, then move on to the dates, and finally discuss volunteer recruitment?",
+                keywords: ["first", "then", "finally", "cover", "target group", "move on"],
+                politePhrases: ["why don't we", "i agree", "shall we"]
+            },
+            {
+                id: "Q05",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Encouraging students to read more English books.",
+                speaker: "Candidate D",
+                dialogue: "Many students find reading English novels too intimidating.",
+                prompt: "Open the discussion on solutions by acknowledging the difficulty and proposing a starting angle.",
+                hint: "Propose starting with lighter materials like graphic novels or magazines.",
+                modelAnswer: "I see your point. To kick off our brainstorm on solutions, shall we first consider whether introducing English magazines or graphic novels would be a good starting point?",
+                keywords: ["kick off", "brainstorm", "solutions", "shall we", "first consider"],
+                politePhrases: ["i see your point", "shall we", "would it be good"]
+            },
+            {
+                id: "Q06",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Reducing plastic waste in the school cafeteria.",
+                speaker: "Candidate A",
+                dialogue: "The cafeteria uses hundreds of disposable plastic utensils every day.",
+                prompt: "Start the discussion on immediate vs long-term measures.",
+                hint: "Set up a two-part framework for the group.",
+                modelAnswer: "That is indeed a major issue. To structure our discussion effectively, why don't we split our suggestions into immediate measures and long-term policies?",
+                keywords: ["structure", "effectively", "why don't we", "immediate", "long-term", "measures"],
+                politePhrases: ["why don't we", "that is indeed"]
+            },
+            {
+                id: "Q07",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Planning an e-sports tournament for students.",
+                speaker: "Candidate B",
+                dialogue: "E-sports is very popular, but some teachers might oppose the idea.",
+                prompt: "Open the discussion by defining the scope and addressing potential concerns.",
+                hint: "Suggest discussing how to balance entertainment with educational value first.",
+                modelAnswer: "Good point. To start on a positive note, shall we first discuss the educational benefits of e-sports to address these concerns early on?",
+                keywords: ["start", "positive note", "shall we", "first discuss", "educational benefits"],
+                politePhrases: ["good point", "shall we"]
+            },
+            {
+                id: "Q08",
+                category: "opening",
+                categoryLabel: "Opening a Discussion",
+                topic: "Setting up a student mentor scheme for Secondary 1 newcomers.",
+                speaker: "Candidate C",
+                dialogue: "S1 students often struggle with adapting to the new English medium curriculum.",
+                prompt: "Open the meeting by pinpointing the primary goal of the scheme.",
+                hint: "Focus the opening turn on the main objective of mentor training.",
+                modelAnswer: "Exactly. To begin our discussion, let me propose that we focus first on how senior mentors can offer academic English support.",
+                keywords: ["begin", "discussion", "propose", "focus first", "support"],
+                politePhrases: ["let me propose", "shall we"]
+            },
+
+            // 9-16 Agreeing & Building on Ideas
+            {
+                id: "Q09",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Promoting healthy eating in school.",
+                speaker: "Candidate B",
+                dialogue: "I think holding a 'Fruit Day' every week would be an effective way to encourage healthy habits.",
+                prompt: "Agree with Candidate B and add an additional practical suggestion to enhance the idea.",
+                hint: "Use phrases like 'I completely agree with Candidate B, and to add to that...'",
+                modelAnswer: "I completely agree with Candidate B's idea. In addition to offering free fruit, we could also organize a smoothie-making workshop to make it more engaging for students.",
+                keywords: ["agree", "candidate b", "in addition", "furthermore", "also", "building"],
+                politePhrases: ["i completely agree", "building on that", "in addition"]
+            },
+            {
+                id: "Q10",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Attracting tourists to local heritage sites in Hong Kong.",
+                speaker: "Candidate A",
+                dialogue: "Creating an interactive mobile app with AR features could make historical buildings more appealing to teenagers.",
+                prompt: "Express strong agreement and elaborate on how social media integration could support this.",
+                hint: "Build on Candidate A's tech suggestion with social sharing.",
+                modelAnswer: "That's a fantastic suggestion from Candidate A. Building on that digital approach, we could also add a social media check-in feature to encourage visitors to share photos online.",
+                keywords: ["fantastic", "candidate a", "building on", "digital", "also", "feature"],
+                politePhrases: ["that's a fantastic suggestion", "building on that", "i couldn't agree more"]
+            },
+            {
+                id: "Q11",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Improving English speaking confidence.",
+                speaker: "Candidate D",
+                dialogue: "Having informal English chat corners during lunchtime would reduce students' anxiety.",
+                prompt: "Agree with Candidate D and suggest inviting native English teachers or international exchange students.",
+                hint: "Validate Candidate D and extend the helper role.",
+                modelAnswer: "I couldn't agree more with Candidate D. To make these chat corners even more effective, we could invite NET teachers or exchange students to join as facilitators.",
+                keywords: ["couldn't agree more", "candidate d", "effective", "invite", "facilitators"],
+                politePhrases: ["i couldn't agree more", "to make it even more"]
+            },
+            {
+                id: "Q12",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Reducing stress among DSE students.",
+                speaker: "Candidate C",
+                dialogue: "School counselors should host mindfulness meditation workshops before mock exams.",
+                prompt: "Agree with C and add a point about physical health or peer support groups.",
+                hint: "Express partial or full agreement and introduce a complementary idea.",
+                modelAnswer: "I echo Candidate C's view on stress relief. Alongside mindfulness sessions, we might also consider setting up peer support groups where students can share study tips.",
+                keywords: ["echo", "candidate c", "alongside", "also consider", "support groups"],
+                politePhrases: ["i echo candidate", "alongside", "we might also"]
+            },
+            {
+                id: "Q13",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Promoting recycling in residential housing estates.",
+                speaker: "Candidate A",
+                dialogue: "Offering small financial rebates or supermarket vouchers could motivate residents to recycle.",
+                prompt: "Agree and explain why monetary incentives are particularly effective in Hong Kong.",
+                hint: "Reinforce the practical economic factor.",
+                modelAnswer: "Candidate A makes a very valid point. Financial incentives are always strong motivators in Hong Kong. To expand on this, we could use smart recycling bins that calculate points automatically.",
+                keywords: ["valid point", "candidate a", "financial", "expand on this", "incentives"],
+                politePhrases: ["makes a very valid point", "to expand on this"]
+            },
+            {
+                id: "Q14",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Improving public library services.",
+                speaker: "Candidate B",
+                dialogue: "Libraries should extend their opening hours during peak exam seasons.",
+                prompt: "Support Candidate B's proposal and add a suggestion about e-book access or study spaces.",
+                hint: "Agree with B and expand to digital facilities.",
+                modelAnswer: "I fully support Candidate B's proposal. Furthermore, to complement extended hours, the library should increase the number of quiet study cubicles equipped with charging ports.",
+                keywords: ["support", "candidate b", "proposal", "furthermore", "complement", "study"],
+                politePhrases: ["i fully support", "furthermore", "to complement"]
+            },
+            {
+                id: "Q15",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Encouraging youth volunteering.",
+                speaker: "Candidate C",
+                dialogue: "Schools should recognize volunteer hours on students' official report cards.",
+                prompt: "Agree enthusiastically and suggest an annual award ceremony.",
+                hint: "Combine official recognition with public praise.",
+                modelAnswer: "You hit the nail on the head, Candidate C. In addition to report card entries, holding an annual Volunteer Appreciation Day would boost students' sense of pride.",
+                keywords: ["hit the nail", "candidate c", "in addition", "appreciation", "pride"],
+                politePhrases: ["you hit the nail on the head", "in addition to"]
+            },
+            {
+                id: "Q16",
+                category: "agree",
+                categoryLabel: "Agree & Build",
+                topic: "Career planning workshops for secondary students.",
+                speaker: "Candidate D",
+                dialogue: "Inviting alumni from various industries to give talk sessions gives realistic insights.",
+                prompt: "Agree with Candidate D and suggest job-shadowing opportunities.",
+                hint: "Move from talks to hands-on experience.",
+                modelAnswer: "That is an excellent point, Candidate D. Taking that idea one step further, we could arrange 1-day job shadowing sessions with those alumni for practical exposure.",
+                keywords: ["excellent point", "candidate d", "taking that step further", "job shadowing", "practical"],
+                politePhrases: ["that is an excellent point", "taking that idea step further"]
+            },
+
+            // 17-24 Polite Disagreement & Alternative Views
+            {
+                id: "Q17",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Organizing a compulsory morning running session for all students.",
+                speaker: "Candidate A",
+                dialogue: "I strongly propose that all students do 20 minutes of compulsory running every morning to stay fit.",
+                prompt: "Politely disagree by raising concerns about student fatigue and timetable constraints.",
+                hint: "Use 'I see your point, but...' or 'While I understand your intention...'",
+                modelAnswer: "I see where Candidate A is coming from, but I am slightly concerned that compulsory morning running might leave students too exhausted for their morning lessons.",
+                keywords: ["see where", "coming from", "concerned", "exhausted", "however", "perspective"],
+                politePhrases: ["i see where you are coming from", "i am slightly concerned", "while I understand"]
+            },
+            {
+                id: "Q18",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Banning smartphone usage completely inside school grounds.",
+                speaker: "Candidate B",
+                dialogue: "Smartphones are pure distractions. The school should ban them completely from campus.",
+                prompt: "Politely offer a counter-argument highlighting educational benefits of smartphones.",
+                hint: "Acknowledge the concern about distraction first, then present the counter-view.",
+                modelAnswer: "While I understand Candidate B's concern regarding distractions, I take a slightly different view. Phones can actually be valuable learning tools for quick research during lessons if regulated.",
+                keywords: ["understand concern", "slightly different view", "however", "learning tools", "regulated"],
+                politePhrases: ["while I understand", "i take a slightly different view", "have you considered"]
+            },
+            {
+                id: "Q19",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Raising entry fees for city museums.",
+                speaker: "Candidate C",
+                dialogue: "Museums need revenue, so doubling ticket prices for adults is reasonable.",
+                prompt: "Disagree politely by arguing that public culture should remain affordable.",
+                hint: "Focus on accessibility for lower-income families.",
+                modelAnswer: "I respect Candidate C's perspective on budget needs, but wouldn't doubling ticket prices deter low-income families from visiting? Perhaps seeking corporate sponsorship would be better.",
+                keywords: ["respect perspective", "deter", "wouldn't", "perhaps", "sponsorship"],
+                politePhrases: ["i respect your perspective", "wouldn't it be better", "perhaps"]
+            },
+            {
+                id: "Q20",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Replacing traditional textbooks entirely with e-books.",
+                speaker: "Candidate D",
+                dialogue: "Textbooks are heavy and outdated. We should replace all paper books with tablets immediately.",
+                prompt: "Politely object by pointing out digital eye strain and device costs.",
+                hint: "Softly challenge the immediate replacement idea.",
+                modelAnswer: "That's an interesting proposal, Candidate D, but have you considered the potential screen fatigue and high financial cost for underprivileged families?",
+                keywords: ["interesting proposal", "have you considered", "fatigue", "cost", "financial"],
+                politePhrases: ["that's an interesting proposal", "have you considered"]
+            },
+            {
+                id: "Q21",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Canceling school sports day to focus on academic revision.",
+                speaker: "Candidate A",
+                dialogue: "Academic results are paramount. We should cancel sports day for S6 students so they can study.",
+                prompt: "Politely disagree by emphasizing work-life balance and mental health.",
+                hint: "Defend sports day as a stress-relief outlet.",
+                modelAnswer: "I appreciate Candidate A's focus on exam results, but I'm afraid I cannot entirely agree. Sports day provides crucial physical release and stress relief for S6 students.",
+                keywords: ["appreciate focus", "cannot entirely agree", "crucial", "stress relief", "balance"],
+                politePhrases: ["i appreciate your focus", "i'm afraid I cannot entirely agree"]
+            },
+            {
+                id: "Q22",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Implementing a strict fine system for late homework submission.",
+                speaker: "Candidate B",
+                dialogue: "Fining students HK$10 for every late assignment will teach them discipline.",
+                prompt: "Politely express reservations regarding punitiveness over education.",
+                hint: "Suggest supportive guidance instead of monetary fines.",
+                modelAnswer: "I see what Candidate B is trying to achieve, but imposing financial penalties might not solve the root problem. Instead, counseling or detention might be more appropriate.",
+                keywords: ["see what", "trying to achieve", "penalties", "root problem", "instead"],
+                politePhrases: ["i see what you are trying to achieve", "might not solve", "instead"]
+            },
+            {
+                id: "Q23",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Choosing a destination for the annual class trip.",
+                speaker: "Candidate C",
+                dialogue: "Let's go on a 3-day trip to Japan since everyone loves Japanese food and shopping.",
+                prompt: "Politely point out budget limits and travel time constraints for a short school weekend.",
+                hint: "Counter with a regional or local alternative.",
+                modelAnswer: "Japan sounds exciting, Candidate C, but given our tight budget and limited days, wouldn't a local eco-tour or a short trip to Macau be much more feasible?",
+                keywords: ["sounds exciting", "budget", "limited days", "wouldn't", "feasible"],
+                politePhrases: ["sounds exciting", "wouldn't a local option be", "feasible"]
+            },
+            {
+                id: "Q24",
+                category: "disagree",
+                categoryLabel: "Polite Disagreement",
+                topic: "Making extra-curricular activities compulsory for all S1-S3 students.",
+                speaker: "Candidate D",
+                dialogue: "Every junior student should be forced to join at least three clubs to build their portfolio.",
+                prompt: "Politely argue that quality matters more than quantity.",
+                hint: "Suggest limiting compulsory joining to one club to avoid burnout.",
+                modelAnswer: "Candidate D makes a good point about portfolio building; however, forcing three clubs might lead to burnout. Wouldn't focusing deeply on just one club be more meaningful?",
+                keywords: ["good point", "however", "burnout", "wouldn't", "focusing deeply"],
+                politePhrases: ["makes a good point", "however", "wouldn't it be better"]
+            },
+
+            // 25-32 Interrupting, Clarifying & Involving Others
+            {
+                id: "Q25",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Planning an orientation day camp for secondary school freshmen.",
+                speaker: "Candidate A (Monopolizing)",
+                dialogue: "...and then after lunch we can do icebreakers, then a treasure hunt, then obstacle courses, then outdoor cooking, and then an evening campfire with singing...",
+                prompt: "Politely interrupt Candidate A to prevent them from dominating, and invite Candidate C (who has been quiet) into the conversation.",
+                hint: "Use 'Sorry to interrupt, but...' and turn to Candidate C.",
+                modelAnswer: "Sorry to interrupt you there Candidate A, but you've shared some great ideas. I noticed Candidate C hasn't had a chance to speak yet. Candidate C, what do you think about these activities?",
+                keywords: ["sorry to interrupt", "shared ideas", "notice", "candidate c", "chance to speak", "what do you think"],
+                politePhrases: ["sorry to interrupt", "i noticed candidate", "what are your thoughts"]
+            },
+            {
+                id: "Q26",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Debating whether fast food advertisements should be restricted.",
+                speaker: "Candidate B",
+                dialogue: "Fast food ads make people hungry and they are everywhere on TV.",
+                prompt: "Politely ask Candidate B to clarify what age group they are referring to.",
+                hint: "Ask for elaboration/clarification politely.",
+                modelAnswer: "Pardon me, Candidate B, could you clarify whether you mean restricting ads targeted at children, or ads aimed at the general public as well?",
+                keywords: ["pardon me", "clarify", "mean", "targeted", "children", "public"],
+                politePhrases: ["pardon me", "could you clarify", "do you mean"]
+            },
+            {
+                id: "Q27",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Designing a campaign to protect stray animals in Hong Kong.",
+                speaker: "Candidate C & D (Talking continuously together)",
+                dialogue: "Candidate C: 'We need adoption fairs!' / Candidate D: 'No, social media videos are much better!'",
+                prompt: "Intervene politely to manage the overlap and bring order back to the discussion.",
+                hint: "Acknowledge both ideas and suggest taking them one by one.",
+                modelAnswer: "Excuse me for jumping in, but both of your points are very valuable. Why don't we look at Candidate C's adoption fair proposal first, and then discuss digital videos?",
+                keywords: ["excuse me for jumping in", "valuable", "why don't we", "first", "then"],
+                politePhrases: ["excuse me for jumping in", "both points are valuable", "why don't we"]
+            },
+            {
+                id: "Q28",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Improving school cafeteria food quality.",
+                speaker: "Silence / Hesitant Candidate D",
+                dialogue: "(Candidate D looks at their notes nervously and remains silent for several seconds)",
+                prompt: "Noticing Candidate D's hesitation, politely invite them to share their view on cafeteria pricing.",
+                hint: "Warmly invite Candidate D without putting excessive pressure.",
+                modelAnswer: "We've discussed the menu choices so far. Candidate D, do you have any thoughts on the pricing or food quality in our cafeteria?",
+                keywords: ["candidate d", "thoughts", "pricing", "quality", "share"],
+                politePhrases: ["do you have any thoughts on", "would you like to share"]
+            },
+            {
+                id: "Q29",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Promoting STEM education in primary schools.",
+                speaker: "Candidate A",
+                dialogue: "We need robotics kits, coding classes, science labs, expensive 3D printers, and drone workshops.",
+                prompt: "Interrupt gently to seek clarification on budget constraints.",
+                hint: "Point out the financial realistic scope.",
+                modelAnswer: "May I interrupt for a moment? Candidate A, those are exciting ideas, but could you clarify how primary schools with limited budgets could afford such advanced equipment?",
+                keywords: ["may I interrupt", "moment", "clarify", "budget", "afford"],
+                politePhrases: ["may I interrupt for a moment", "could you clarify"]
+            },
+            {
+                id: "Q30",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Creating a school podcast channel.",
+                speaker: "Candidate B",
+                dialogue: "We can talk about pop music, gaming trends, movie reviews, and teacher interviews.",
+                prompt: "Involve Candidate C who has experience with school audio equipment.",
+                hint: "Pass the microphone to Candidate C's specific area of expertise.",
+                modelAnswer: "Those content ideas sound fun, Candidate B. I know Candidate C is part of the school AV team—Candidate C, how technical would it be to record these podcasts?",
+                keywords: ["candidate c", "av team", "technical", "record", "opinion"],
+                politePhrases: ["i know candidate c has experience", "how do you view this"]
+            },
+            {
+                id: "Q31",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Re-organizing the school library layout.",
+                speaker: "Candidate C",
+                dialogue: "We should put soft sofas everywhere in the quiet zone so students can relax while reading.",
+                prompt: "Politely interrupt to ask Candidate C to define 'quiet zone' rules.",
+                hint: "Ask if sofas might cause students to sleep or chat.",
+                modelAnswer: "Sorry to break in, Candidate C, but could you elaborate on how we would maintain a quiet atmosphere if the zone becomes a relaxation lounge?",
+                keywords: ["sorry to break in", "elaborate", "maintain", "atmosphere", "quiet"],
+                politePhrases: ["sorry to break in", "could you elaborate on"]
+            },
+            {
+                id: "Q32",
+                category: "interrupt",
+                categoryLabel: "Interrupting/Involving",
+                topic: "Deciding on a slogan for the Green Campus project.",
+                speaker: "Candidate D",
+                dialogue: "I can't decide between 'Go Green Today' or 'Save Our Earth, Save Our Future'.",
+                prompt: "Politely interject and invite the rest of the group to vote or comment.",
+                hint: "Bring the group to a collective decision point.",
+                modelAnswer: "If I may jump in here, both slogans are catchy. Candidates A and B, which of these two slogans do you feel resonates more with students?",
+                keywords: ["if I may jump in", "slogans", "candidates", "resonates", "feel"],
+                politePhrases: ["if I may jump in", "which of these do you feel"]
+            },
+
+            // 33-40 Steering Topic & Summarizing/Concluding
+            {
+                id: "Q33",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Planning an English Week celebration.",
+                speaker: "Candidate A & B",
+                dialogue: "(Spent 4 minutes discussing only the decoration colors for the hall backdrop)",
+                prompt: "Steer the group back to the main topic (event activities) as time is passing.",
+                hint: "Gently remind group of time and redirect focus.",
+                modelAnswer: "Excuse me everyone, while the backdrop color is important, keeping our time in mind, shall we steer our attention back to the main event activities?",
+                keywords: ["time in mind", "steer attention", "back to", "main activities", "shall we"],
+                politePhrases: ["keeping our time in mind", "shall we steer our focus back to"]
+            },
+            {
+                id: "Q34",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Discussing solutions for youth screen addiction.",
+                speaker: "Candidate C",
+                dialogue: "My cousin spends 8 hours on TikTok every day and my aunt is always yelling at him at home...",
+                prompt: "Politely steer Candidate C away from personal stories back to general student solutions.",
+                hint: "Validate the personal story briefly, then pivot back to general solutions.",
+                modelAnswer: "That's a relatable personal example, Candidate C, but to stay focused on our discussion points, let's explore general school strategies to address screen time.",
+                keywords: ["relatable example", "stay focused", "discussion points", "let's explore", "general strategies"],
+                politePhrases: ["that's a relatable example", "to stay focused on our task"]
+            },
+            {
+                id: "Q35",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Designing a school wellness campaign.",
+                speaker: "Candidate D",
+                dialogue: "I think we have thoroughly discussed the physical fitness activities and sports workshops.",
+                prompt: "Transition the group from the physical health point to the second prompt on mental health.",
+                hint: "Use transition phrases like 'Since we've covered... shall we move on to...'",
+                modelAnswer: "Since we have reached a consensus on physical activities, shall we transition to the second item on our prompt sheet, which concerns mental well-being?",
+                keywords: ["consensus", "transition", "second item", "prompt sheet", "shall we"],
+                politePhrases: ["since we have covered", "shall we transition to"]
+            },
+            {
+                id: "Q36",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Selecting a venue for the graduation prom.",
+                speaker: "Candidate A",
+                dialogue: "We only have 1 minute left in our discussion!",
+                prompt: "Take the lead to summarize the agreed venue and conclude the discussion effectively.",
+                hint: "Summarize major consensus before time expires.",
+                modelAnswer: "As time is running short, let me briefly summarize. We all agree that the hotel ballroom is the best option due to capacity and location. Thank you everyone for a fruitful discussion.",
+                keywords: ["time is running short", "summarize", "agree", "best option", "fruitful discussion"],
+                politePhrases: ["as time is running short", "let me summarize", "thank you for a fruitful discussion"]
+            },
+            {
+                id: "Q37",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Proposing new eco-friendly rules for school.",
+                speaker: "Candidate B",
+                dialogue: "So we disagreed on air-conditioner temperature, but agreed on banning plastic bottles.",
+                prompt: "Conclude the discussion by highlighting points of agreement and acknowledging remaining differences.",
+                hint: "Wrap up balanced view of consensus and disagreement.",
+                modelAnswer: "To sum up our discussion, we have reached a solid consensus on banning plastic bottles, while agreeing to research air-con rules further. Thank you all for your contribution.",
+                keywords: ["sum up", "consensus", "agreed", "further research", "contribution"],
+                politePhrases: ["to sum up our discussion", "thank you for your contributions"]
+            },
+            {
+                id: "Q38",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Ways to support elderly people living alone.",
+                speaker: "Candidate C",
+                dialogue: "We discussed home visits, free meal deliveries, and smartphone tutorials.",
+                prompt: "Lead the group to pick the most effective option as requested by the exam prompt.",
+                hint: "Ask the group to vote or reach a final recommendation.",
+                modelAnswer: "Looking at our options, shall we conclude which measure would be the most effective priority for our school community to organize?",
+                keywords: ["looking at options", "conclude", "most effective", "priority", "shall we"],
+                politePhrases: ["shall we conclude", "which option would be the most"]
+            },
+            {
+                id: "Q39",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Organizing an Inter-school Debate Competition.",
+                speaker: "Candidate D",
+                dialogue: "Should the motion topic be about artificial intelligence or environmental protection?",
+                prompt: "Help the group finalize the choice quickly as time is limited.",
+                hint: "Synthesize options into a final compromise or decision.",
+                modelAnswer: "Since time is nearly up, why don't we take a quick show of hands? AI seems to have more support, so let's finalize AI as our primary debate topic.",
+                keywords: ["time is nearly up", "show of hands", "finalize", "primary topic"],
+                politePhrases: ["since time is nearly up", "why don't we finalize"]
+            },
+            {
+                id: "Q40",
+                category: "steering",
+                categoryLabel: "Steering & Concluding",
+                topic: "Improving student participation in school clubs.",
+                speaker: "Group Silence at 7 font-size mark",
+                dialogue: "(All candidates have finished their points and look at each other with 30 seconds remaining)",
+                prompt: "Provide a polite final closing statement to bring the group discussion to a smooth end.",
+                hint: "Synthesize all ideas and thank candidates gracefully.",
+                modelAnswer: "Since we have thoroughly covered all points on our discussion sheet, let's wrap up here. Thank you everyone for your valuable insights and constructive ideas today.",
+                keywords: ["thoroughly covered", "wrap up", "thank you", "valuable insights", "constructive"],
+                politePhrases: ["let's wrap up here", "thank you everyone for your valuable insights"]
+            }
+        ];
+
+        // HKDSE Pro Tips database
+        const dseTips = [
+            "Always elaborate on your point after using an expression! Don't just say 'I agree with Candidate A'. Explain *why* you agree and add a new perspective.",
+            "Maintain eye contact with all group candidates, not just the examiner. Examiners judge your real-world interaction skills.",
+            "If someone is quiet, don't say 'Candidate C, you haven't spoken'. Be polite: 'Candidate C, we'd love to hear your thoughts on this point.'",
+            "Avoid overly aggressive phrases like 'You are totally wrong'. Use DSE softeners: 'I see your point, but have you considered...'",
+            "Keep an eye on the time! If the group is stuck on point 1 for 3 minutes, gain steering marks by moving everyone to point 2.",
+            "Use signposting words (First and foremost, Moving on to, To wrap up) to make your speech structured and easy to follow."
+        ];
+
+        // App State Variables
+        let currentUser = { name: "", classId: "", score: 0 };
+        let currentQuestionIndex = 0;
+        let activeFilter = "all";
+        let filteredQuestions = [...questionsData];
+        let userAnswers = {}; // Stores { questionId: { answer, score, evaluated, skipped } }
+
+        // Helper function for iFrame safe text copying
+        function copyToClipboard(text, btnElement) {
+            try {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                // Show toast
+                const toast = document.getElementById('toast');
+                document.getElementById('toastMsg').innerText = "Copied to clipboard!";
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2000);
+
+                // Quick visual feedback on button
+                if (btnElement) {
+                    const originalHTML = btnElement.innerHTML;
+                    btnElement.innerHTML = '<i class="fa-solid fa-check text-green-500"></i>';
+                    setTimeout(() => btnElement.innerHTML = originalHTML, 1500);
+                }
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        // Initialize App on DOM Load
+        window.onload = function() {
+            checkSavedSession();
+            rotateTip();
+        };
+
+        // Handle Login
+        function handleLogin(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('studentName').value.trim();
+            const classInput = document.getElementById('studentClass').value.trim();
+
+            if (!nameInput) return;
+
+            currentUser.name = nameInput;
+            currentUser.classId = classInput || "Candidate";
+            currentUser.score = 0;
+
+            // Save to localStorage
+            localStorage.setItem('hkdse_user', JSON.stringify(currentUser));
+
+            setupUserUI();
+            showPracticeView();
+        }
+
+        function checkSavedSession() {
+            const saved = localStorage.getItem('hkdse_user');
+            if (saved) {
+                try {
+                    currentUser = JSON.parse(saved);
+                    setupUserUI();
+                    showPracticeView();
+                } catch(e) {
+                    console.error("Session parse error", e);
+                }
+            }
+        }
+
+        function setupUserUI() {
+            document.getElementById('displayName').innerText = currentUser.name;
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+            document.getElementById('userAvatar').innerText = initials || 'S';
+            document.getElementById('userBadge').classList.remove('hidden');
+            document.getElementById('userBadge').classList.add('flex');
+            
+            // Load previous answers if any
+            const savedAnswers = localStorage.getItem(`hkdse_answers_${currentUser.name}`);
+            if (savedAnswers) {
+                try {
+                    userAnswers = JSON.parse(savedAnswers);
+                } catch(e) {
+                    userAnswers = {};
+                }
+            }
+            updateUserStats();
+        }
+
+        function logout() {
+            document.getElementById('loginView').classList.remove('hidden');
+            document.getElementById('practiceView').classList.add('hidden');
+            document.getElementById('userBadge').classList.add('hidden');
+            document.getElementById('studentName').value = '';
+        }
+
+        function showPracticeView() {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('practiceView').classList.remove('hidden');
+            applyFilter();
+            renderQuestion();
+            renderQuestionGrid();
+        }
+
+        function setFilter(filterCategory) {
+            activeFilter = filterCategory;
+            
+            // Update Tab UI
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+
+            const activeBtn = document.getElementById(`filter-${filterCategory}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+            }
+
+            applyFilter();
+            currentQuestionIndex = 0;
+            renderQuestion();
+            renderQuestionGrid();
+        }
+
+        function applyFilter() {
+            if (activeFilter === 'all') {
+                filteredQuestions = [...questionsData];
+            } else {
+                filteredQuestions = questionsData.filter(q => q.category === activeFilter);
+            }
+        }
+
+        function renderQuestion() {
+            if (filteredQuestions.length === 0) return;
+
+            const q = filteredQuestions[currentQuestionIndex];
+
+            // Category & Index Display
+            document.getElementById('categoryBadge').innerText = q.categoryLabel;
+            document.getElementById('questionIndexText').innerText = `Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}`;
+            document.getElementById('qIdDisplay').innerText = `#${q.id}`;
+
+            // Exam Topic & Scenario
+            document.getElementById('examTopic').innerText = `"${q.topic}"`;
+
+            // Dialogue Container setup
+            const dialogueBox = document.getElementById('dialogueContainer');
+            dialogueBox.innerHTML = `
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0">
+                        ${q.speaker.charAt(0)}
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-xs text-slate-700 shadow-sm max-w-xl">
+                        <span class="font-bold text-slate-900 block mb-1">${q.speaker}:</span>
+                        "${q.dialogue}"
+                    </div>
+                </div>
+                <div class="mt-2 text-xs font-semibold text-indigo-900 bg-indigo-50/80 p-2.5 rounded-lg border border-indigo-100">
+                    <i class="fa-solid fa-bullseye text-indigo-600 mr-1"></i>
+                    <span>Task: ${q.prompt}</span>
+                </div>
+            `;
+
+            // Input Reset / Restore
+            const inputField = document.getElementById('studentAnswer');
+            const evalResult = document.getElementById('evalResult');
+            const hintBox = document.getElementById('hintBox');
+
+            hintBox.classList.add('hidden');
+            document.getElementById('hintText').innerText = q.hint;
+
+            const existingRecord = userAnswers[q.id];
+            if (existingRecord) {
+                inputField.value = existingRecord.answer || '';
+                if (existingRecord.evaluated) {
+                    showEvaluationDisplay(existingRecord);
+                } else {
+                    evalResult.classList.add('hidden');
+                }
+            } else {
+                inputField.value = '';
+                evalResult.classList.add('hidden');
+            }
+
+            updateCharCount();
+            updateNavButtons();
+        }
+
+        function updateCharCount() {
+            const txt = document.getElementById('studentAnswer').value;
+            document.getElementById('charCount').innerText = `${txt.length} chars`;
+        }
+
+        function updateNavButtons() {
+            document.getElementById('btnPrev').disabled = (currentQuestionIndex === 0);
+            document.getElementById('btnPrev').style.opacity = (currentQuestionIndex === 0) ? "0.5" : "1";
+
+            document.getElementById('btnNext').disabled = (currentQuestionIndex === filteredQuestions.length - 1);
+            document.getElementById('btnNext').style.opacity = (currentQuestionIndex === filteredQuestions.length - 1) ? "0.5" : "1";
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                renderQuestionGrid();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < filteredQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                renderQuestionGrid();
+            }
+        }
+
+        function showHint() {
+            const hintBox = document.getElementById('hintBox');
+            hintBox.classList.toggle('hidden');
+        }
+
+        function submitAnswer() {
+            const q = filteredQuestions[currentQuestionIndex];
+            const answerText = document.getElementById('studentAnswer').value.trim();
+
+            if (answerText.length < 10) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toastMsg').innerText = "Please write at least 10 characters.";
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2500);
+                return;
+            }
+
+            const lowerAnswer = answerText.toLowerCase();
+
+            // Evaluation Algorithm
+            let matchedKeywords = [];
+            let matchedPolite = [];
+
+            q.keywords.forEach(kw => {
+                if (lowerAnswer.includes(kw.toLowerCase())) {
+                    matchedKeywords.push(kw);
+                }
+            });
+
+            q.politePhrases.forEach(pp => {
+                if (lowerAnswer.includes(pp.toLowerCase())) {
+                    matchedPolite.push(pp);
+                }
+            });
+
+            // Score Calculation
+            let keywordScore = (matchedKeywords.length / Math.min(q.keywords.length, 3)) * 50;
+            let politeScore = (matchedPolite.length > 0) ? 30 : 10;
+            let lengthBonus = Math.min(answerText.length / 2, 20); // up to 20 pts for detailed elaboration
+
+            let totalScore = Math.min(Math.round(keywordScore + politeScore + lengthBonus), 100);
+
+            let feedbackLevel = "Level 3";
+
+            if (totalScore >= 80) {
+                feedbackLevel = "Level 5** Excellent HKDSE Response!";
+            } else if (totalScore >= 60) {
+                feedbackLevel = "Level 4 Good Functional Response";
+            }
+
+            const record = {
+                questionId: q.id,
+                answer: answerText,
+                score: totalScore,
+                feedbackLevel: feedbackLevel,
+                matchedKeywords: matchedKeywords,
+                matchedPolite: matchedPolite,
+                evaluated: true,
+                skipped: false
+            };
+
+            userAnswers[q.id] = record;
+            saveAnswers();
+            updateUserStats();
+            showEvaluationDisplay(record);
+            renderQuestionGrid();
+        }
+
+        function showEvaluationDisplay(record) {
+            const q = questionsData.find(item => item.id === record.questionId);
+            const evalBox = document.getElementById('evalResult');
+            evalBox.classList.remove('hidden');
+
+            const isHigh = record.score >= 70;
+            const badgeColor = isHigh ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800";
+
+            evalBox.className = `rounded-xl border p-4 space-y-3 transition-all ${isHigh ? 'bg-green-50/70 border-green-200' : 'bg-slate-50 border-slate-200'}`;
+
+            const escapedModel = q.modelAnswer.replace(/'/g, "\\'");
+
+            evalBox.innerHTML = `
+                <div class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider ${badgeColor} px-2.5 py-0.5 rounded-md">
+                        ${record.feedbackLevel}
+                    </span>
+                    <span class="text-sm font-extrabold ${isHigh ? 'text-green-700' : 'text-amber-700'}">
+                        Score: ${record.score} / 100
+                    </span>
+                </div>
+
+                <div class="space-y-2 text-xs">
+                    <div>
+                        <span class="font-bold text-slate-700">Polite & Functional Elements Detected:</span>
+                        <div class="flex flex-wrap gap-1 mt-1">
+                            ${record.matchedPolite.length > 0 
+                                ? record.matchedPolite.map(p => `<span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded text-[11px] font-medium"><i class="fa-solid fa-check text-indigo-600 mr-1"></i>${p}</span>`).join('')
+                                : '<span class="text-slate-400 italic">No standard DSE polite phrases detected. Try adding "Shall we...", "I see your point, but..."</span>'
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="font-bold text-slate-700">Target Strategy Keywords Found:</span>
+                        <div class="flex flex-wrap gap-1 mt-1">
+                            ${record.matchedKeywords.length > 0
+                                ? record.matchedKeywords.map(k => `<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[11px] font-medium"><i class="fa-solid fa-tag text-blue-600 mr-1"></i>${k}</span>`).join('')
+                                : '<span class="text-slate-400 italic">Try incorporating strategy key terms from the prompt hint.</span>'
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mt-3 pt-2 border-t border-slate-200/60">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-slate-800"><i class="fa-solid fa-star text-amber-500 mr-1"></i> Model HKDSE Benchmark Answer:</span>
+                            <button onclick="copyToClipboard('${escapedModel}', this)" class="px-2 py-0.5 bg-slate-200 hover:bg-blue-600 hover:text-white rounded text-[11px] font-semibold transition flex items-center space-x-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copy Answer</span>
+                            </button>
+                        </div>
+                        <p class="bg-white p-3 rounded-lg border border-slate-200 font-medium text-slate-800 text-xs italic leading-relaxed">
+                            "${q.modelAnswer}"
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function skipQuestion() {
+            const q = filteredQuestions[currentQuestionIndex];
+            if (!userAnswers[q.id]) {
+                userAnswers[q.id] = {
+                    questionId: q.id,
+                    answer: "",
+                    score: 0,
+                    evaluated: false,
+                    skipped: true
+                };
+                saveAnswers();
+                updateUserStats();
+                renderQuestionGrid();
+            }
+            nextQuestion();
+        }
+
+        function saveAnswers() {
+            localStorage.setItem(`hkdse_answers_${currentUser.name}`, JSON.stringify(userAnswers));
+        }
+
+        function updateUserStats() {
+            const answeredKeys = Object.keys(userAnswers);
+            const totalAnswered = answeredKeys.filter(k => userAnswers[k].evaluated).length;
+            
+            let totalPoints = 0;
+            answeredKeys.forEach(k => {
+                if (userAnswers[k].evaluated) {
+                    totalPoints += userAnswers[k].score;
+                }
+            });
+
+            const avgScore = totalAnswered > 0 ? Math.round(totalPoints / totalAnswered) : 0;
+
+            document.getElementById('displayStats').innerText = `Avg Score: ${avgScore}% | Answered: ${totalAnswered}/40`;
+            document.getElementById('completionCounter').innerText = `${totalAnswered} / 40 Answered`;
+        }
+
+        function renderQuestionGrid() {
+            const grid = document.getElementById('qGrid');
+            grid.innerHTML = '';
+
+            filteredQuestions.forEach((q, idx) => {
+                const rec = userAnswers[q.id];
+                let btnStyle = "bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200";
+
+                if (rec) {
+                    if (rec.evaluated) {
+                        btnStyle = rec.score >= 70 
+                            ? "bg-green-500 text-white font-bold border-green-600" 
+                            : "bg-amber-500 text-white font-bold border-amber-600";
+                    } else if (rec.skipped) {
+                        btnStyle = "bg-amber-100 text-amber-700 font-semibold border-amber-300";
+                    }
+                }
+
+                if (idx === currentQuestionIndex) {
+                    btnStyle += " ring-2 ring-blue-600 ring-offset-1";
+                }
+
+                const btn = document.createElement('button');
+                btn.className = `h-9 w-full rounded-lg text-xs font-semibold border flex items-center justify-center transition ${btnStyle}`;
+                btn.innerText = q.id;
+                btn.onclick = () => {
+                    currentQuestionIndex = idx;
+                    renderQuestion();
+                    renderQuestionGrid();
+                };
+
+                grid.appendChild(btn);
+            });
+        }
+
+        function filterQuestionList() {
+            const searchVal = document.getElementById('qSearch').value.toLowerCase();
+            const gridButtons = document.getElementById('qGrid').children;
+
+            filteredQuestions.forEach((q, idx) => {
+                const btn = gridButtons[idx];
+                if (!btn) return;
+
+                const match = q.id.toLowerCase().includes(searchVal) || 
+                              q.topic.toLowerCase().includes(searchVal) || 
+                              q.categoryLabel.toLowerCase().includes(searchVal);
+
+                if (match) {
+                    btn.style.display = "flex";
+                } else {
+                    btn.style.display = "none";
+                }
+            });
+        }
+
+        function rotateTip() {
+            const randomTip = dseTips[Math.floor(Math.random() * dseTips.length)];
+            document.getElementById('dseTipText').innerText = `"${randomTip}"`;
+        }
+
+        // Modal Controls
+        function openCheatSheet() {
+            document.getElementById('cheatSheetModal').classList.remove('hidden');
+        }
+
+        function closeCheatSheet() {
+            document.getElementById('cheatSheetModal').classList.add('hidden');
+        }
+
+        function showSummaryModal() {
+            document.getElementById('summaryModal').classList.remove('hidden');
+            
+            document.getElementById('summaryStudentMeta').innerText = `Student: ${currentUser.name} (${currentUser.classId}) | Date: ${new Date().toLocaleDateString()}`;
+
+            const answeredKeys = Object.keys(userAnswers).filter(k => userAnswers[k].evaluated);
+            const count = answeredKeys.length;
+
+            let sumScore = 0;
+            answeredKeys.forEach(k => sumScore += userAnswers[k].score);
+
+            const avgScore = count > 0 ? Math.round(sumScore / count) : 0;
+
+            document.getElementById('summaryCompleted').innerText = `${count} / 40`;
+            document.getElementById('summaryScore').innerText = `${avgScore}%`;
+
+            let grade = "Level 2/3";
+            if (avgScore >= 85) grade = "Level 5**";
+            else if (avgScore >= 75) grade = "Level 5*";
+            else if (avgScore >= 65) grade = "Level 4";
+            else if (avgScore >= 50) grade = "Level 3";
+
+            document.getElementById('summaryGrade').innerText = grade;
+
+            // Render category breakdown
+            const catMap = {
+                opening: { name: "Opening & Topic Setup", total: 8, done: 0, scoreSum: 0 },
+                agree: { name: "Agreeing & Building Ideas", total: 8, done: 0, scoreSum: 0 },
+                disagree: { name: "Polite Disagreement", total: 8, done: 0, scoreSum: 0 },
+                interrupt: { name: "Interrupting & Involving", total: 8, done: 0, scoreSum: 0 },
+                steering: { name: "Steering & Concluding", total: 8, done: 0, scoreSum: 0 }
+            };
+
+            questionsData.forEach(q => {
+                const rec = userAnswers[q.id];
+                if (rec && rec.evaluated && catMap[q.category]) {
+                    catMap[q.category].done++;
+                    catMap[q.category].scoreSum += rec.score;
+                }
+            });
+
+            const breakdownContainer = document.getElementById('categoryBreakdownList');
+            breakdownContainer.innerHTML = '';
+
+            Object.keys(catMap).forEach(key => {
+                const item = catMap[key];
+                const catAvg = item.done > 0 ? Math.round(item.scoreSum / item.done) : 0;
+
+                const row = document.createElement('div');
+                row.className = "space-y-1";
+                row.innerHTML = `
+                    <div class="flex justify-between font-semibold text-slate-700">
+                        <span>${item.name} (${item.done}/${item.total})</span>
+                        <span>${catAvg}% Accuracy</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                        <div class="bg-blue-600 h-full rounded-full transition-all" style="width: ${catAvg}%"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(row);
+            });
+
+            // Examiner Advice logic
+            let advice = "Great start! Continue practicing all 40 questions to build fluency in key HKDSE discussion strategies.";
+            if (count > 10 && avgScore < 60) {
+                advice = "Focus on learning polite softening expressions like 'I see your point, but...' and ensure you elaborate on your answers with specific examples.";
+            } else if (count > 10 && avgScore >= 75) {
+                advice = "Excellent work! Your use of functional expressions is strong. Aim to take leading steering roles and invite quieter group members in your real exam.";
+            }
+            document.getElementById('examinerAdviceText').innerText = advice;
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summaryModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
